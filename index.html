@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoloBooks</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>SoloBooks</h1>
+    <p>Invoice + accounting helper for small businesses</p>
+  </header>
+
+  <main>
+    <section class="dashboard">
+      <div class="card"><h3>Sales Before HST</h3><p id="totalIncome">$0.00</p></div>
+      <div class="card"><h3>HST Collected</h3><p id="totalHst">$0.00</p></div>
+      <div class="card"><h3>Expenses Before HST</h3><p id="totalExpenses">$0.00</p></div>
+      <div class="card"><h3>Profit Before Tax</h3><p id="totalProfit">$0.00</p></div>
+      <div class="card"><h3>HST Paid</h3><p id="hstPaidBox">$0.00</p></div>
+      <div class="card"><h3>Net HST Owed</h3><p id="netHstBox">$0.00</p></div>
+    </section>
+
+    <section class="panel">
+      <h2>Create Invoice</h2>
+
+      <div class="form-grid">
+        <input id="businessName" type="text" placeholder="Business name" value="Christina Patricia" />
+        <input id="clientName" type="text" placeholder="Client name" />
+        <input id="serviceName" type="text" placeholder="Service description" />
+        <input id="amount" type="number" placeholder="Amount before HST" />
+        <input id="invoiceDate" type="date" />
+        <input id="dueDate" type="date" />
+      </div>
+
+      <button onclick="createInvoice()">Save Invoice</button>
+    </section>
+
+    <section class="panel">
+      <h2>Add Expense</h2>
+
+      <div class="form-grid">
+        <input id="expenseName" type="text" placeholder="Expense name" />
+        <input id="expenseAmount" type="number" placeholder="Expense before HST" />
+
+        <select id="expenseHstType">
+          <option value="none">No HST</option>
+          <option value="auto">Auto 13% HST</option>
+          <option value="custom">Custom HST</option>
+        </select>
+
+        <input id="expenseHst" type="number" placeholder="Custom HST amount" />
+      </div>
+
+      <button onclick="addExpense()">Save Expense</button>
+    </section>
+
+    <section class="panel">
+      <h2>Backup / Export</h2>
+      <button onclick="downloadBackup()">Download Backup JSON</button>
+      <button onclick="downloadInvoicesCSV()">Export Invoices CSV</button>
+      <button onclick="downloadExpensesCSV()">Export Expenses CSV</button>
+      <button onclick="downloadSummaryCSV()">Export Summary CSV</button>
+      <input type="file" id="backupFile" accept=".json" onchange="restoreBackup(event)" />
+    </section>
+
+    <section class="panel">
+      <h2>Invoices</h2>
+      <div id="invoiceList"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Expenses</h2>
+      <div id="expenseList"></div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
